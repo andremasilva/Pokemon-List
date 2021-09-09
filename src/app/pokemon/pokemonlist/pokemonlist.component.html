@@ -1,0 +1,39 @@
+<h1 class="">Pokemon List</h1>
+<hr />
+
+<input
+  type="text"
+  class="form-control mb-2"
+  placeholder="Catch Pokemon"
+  #txtSearch
+  (keyup)="onSearchPokemon(txtSearch.value)"
+/>
+
+<button class="btn btn-primary" (click)="prevPage()">Previous Page</button>
+
+&nbsp;
+
+<button
+  class="btn btn-primary"
+  (click)="nextPage()"
+  [disabled]="(pokemons | filter: page:search).length === 0"
+>
+  Next Page
+</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Sprite</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let poke of pokemons | filter: page:search">
+      <td>{{ poke.id }}</td>
+      <td>{{ poke.name }}</td>
+      <td><img [src]="poke.pic" alt="poke.name" /></td>
+    </tr>
+  </tbody>
+</table>
